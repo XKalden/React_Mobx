@@ -39,7 +39,7 @@ export default {
     {
       date: "2017-01-22",
       high: -5,
-      low: -15,
+      low: -20,
       weather: "Snowy"
     },
     {
@@ -50,7 +50,7 @@ export default {
     },
     {
       date: "2017-01-24",
-      high: -5,
+      high: -9,
       low: -15,
       weather: "Sunny"
     }

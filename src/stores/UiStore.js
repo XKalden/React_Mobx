@@ -4,8 +4,20 @@ class UiStore {
   @observable showForecast = false;
   @observable showChat = false;
 
-  @action toggleForecast = () => {};
-  @action toggleChat = () => {};
+  @action 
+  toggleForecast = () => {
+    this.showForecast = !this.showForecast;
+  };
+
+
+  @action 
+  toggleChat = () => {
+    this.showChat = !this.showChat;
+
+
+  };
 }
 
+
+// singleton
 export default new UiStore();
