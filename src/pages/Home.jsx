@@ -1,9 +1,6 @@
 import React from "react";
-import { TweenMax } from "gsap";
-import axios from "axios";
-
 import PlacesAutocomplete from "react-places-autocomplete";
-// import { inject, observer } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import {
   Container, // Wrapper (div) for all the content in this component
   Logo, // The logo image (img)
@@ -17,86 +14,4 @@ import {
 
 import logo from "../images/theclima.svg";
 
-export default class Home extends React.Component {
-
-  state = {
-    searchValue: "",
-    nearby:[]
-  };
-
-  componentDidMount(){
-    TweenMax.fromTo( this.logoRef, 1,
-      {opacity:0, scale: 0.5 },
-      {opacity: 1, scale: 1} );
-
-      // this.loadNearby()
-
-      this.fetchNearByCities(43.644, -79.397);
-
-  }
-
-  loadNearby = () => {
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(position => {
-        const{latitude, longitude} = position.coords;
-
-        this.fetchNearByCities(latitude, longitude);
-
-      });
-
-    }
-  };
-
-  fetchNearByCities = async (latitude, longitude) => {
-    const response = await axios.get("https://abnormal-weather-api.herokuapp.com/cities/nearby", 
-    {params: {latitude, longitude}}
-
-
-    );
-    this.setState({
-      nearby:response.data
-    });
-  };
-
-
-
-  render(){
-    return (
-      <Container>
-        <Logo innerRef={(element) =>  {this.logoRef = element;}} src={logo} />
-
-        <Form>
-          <Label> Search for your city</Label>
-          <PlacesAutocomplete 
-          inputProps={{
-            value: this.state.searchValue, 
-
-            onChange: newValue => {
-              this.setState({
-                searchValue: newValue
-              });
-            }
-            }}
-            styles={autoComplete} 
-            onSelect={selectedValue => {
-              this.props.history.push(`/${selectedValue}`);
-            }}
-            />
-
-        </Form>
-
-        <NearbyCities>
-          {this.state.nearby.map((city) => (
-            <NearbyCity key={city.id}>
-              <NearbyLink to={`/${city.name}`}>{city.name}
-              </NearbyLink>
-            </NearbyCity>
-          ))}
-
-        </NearbyCities>
-
-
-      </Container>
-    )
-  }
-}
+export default () => "Home";
